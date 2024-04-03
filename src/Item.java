@@ -49,9 +49,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item [name=" + name + ", category=" + category + ", studentName=" + studentName + ", price=" + price
-                + "]";
+        return "Item information name: " + name + ", category: " + category + ", student name who is selling it: " + studentName + ", price: " + price
+                + "";
     }
+
+    
 
 
     
