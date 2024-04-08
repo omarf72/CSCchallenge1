@@ -1,7 +1,3 @@
-
-
-
-
 public class BuyOption {
 
     //cart array
@@ -15,21 +11,57 @@ public class BuyOption {
 
     public BuyOption(){
     // Intializing the 5 items for sale
-    Item item1=new Item("Couch", " Furniture", 
-     "omar.fofana@quinnipiac.edu", 100.00);
+    Item item1=new Item
+    (
+        "Couch", 
+        " Furniture", 
+        "Omar",
+        "Fofana",
+        "omar.fofana@quinnipiac.edu", 
+        100.00
+    );
  
-    Item item2=new Item("Macbook","Technology",
-     "billy.hill@quinnipiac.edu" , 750.00);
+    Item item2=new Item
+    (
+        "Macbook",
+        "Technology",
+        "Billy",
+        "Hill",
+        "billy.hill@quinnipiac.edu" , 
+        750.00
+    );
  
  
-    Item item3=new Item("Playstation5","Technology",
-     "jared.allen@quinnipiac.edu",500.00);
+    Item item3=new Item
+    (
+        "Playstation5",
+        "Technology",
+        "Jared",
+        "Allen",
+        "jared.allen@quinnipiac.edu",
+        500.00
+    );
  
  
-    Item item4=new Item("Notebooks","School supplies ",
-      "jacob.quake@quinnipiac.edu ", 20.00);
+    Item item4=new Item
+    (
+        "Notebooks",
+        "School supplies ",
+        "Jacob",
+        "Quake",
+        "jacob.quake@quinnipiac.edu ", 
+        20.00
+    );
  
-    Item item5=new Item("Microwave","Appliances","chris.redfield",70.00);
+    Item item5=new Item
+    (
+        "Microwave",
+        "Appliances",
+        "Chris",
+        "Redfield",
+        "chris.redfield",
+        70.00
+    );
 
     //putting the item in the array
     itemList= new Item[]{item1,item2,item3,item4,item5};
@@ -84,6 +116,16 @@ public class BuyOption {
         }
     }
 
+    public Item getItem(String itemName) {
+        for (Item item : itemList) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+        return null; // Item not found
+    }
+
+
    /*  public void buyItem(String choice)
     {
 
@@ -99,8 +141,7 @@ public class BuyOption {
 
         for(int index=0;index<size;index++)
         {
-            System.out.println(itemList[index].getName());
-            System.out.println();
+            System.out.println(" " + itemList[index].getName());
         }
     }
 
