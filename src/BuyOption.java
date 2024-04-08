@@ -109,9 +109,12 @@ public class BuyOption {
 
     public void selectItem(String choice) {
         for (int index = 0; index < size; index++) {
-            if (choice.equals(itemList[index].getName())) {
+            if (choice.equals(itemList[index].getName().toLowerCase())) {
                 System.out.println(itemList[index].toString());
                 break; 
+            } else {
+                System.out.println("Please choose a valid item");
+                break;
             }
         }
     }
