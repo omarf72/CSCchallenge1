@@ -1,60 +1,96 @@
 import java.util.Scanner;
 
 public class App {
+    // Create a cart option
+    private static Cart cart = new Cart(10);
+    private static BuyOption buy = new BuyOption(); // Define BuyOption instance outside the method
 
-    public static void simulate(){
-        BuyOption buy= new BuyOption();
-        Scanner scan= new Scanner(System.in);
+    public static void simulate() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose an option: \n Buy \n Sell \n Cart \n Logout");
+        String answerMenu = scan.next();
+        System.out.println();
 
-        System.out.println(" Choose an option:Buy,Sell,Cart,Logout : type Buy,Sell Cart or Logout");
-
-        String answer=scan.next();
-
-       System.out.println();
-
-        switch (answer) {
-            case "Buy":
-                System.out.println(" Items for sale: ");
-                System.out.println();
-                buy.displayList();
-                System.out.println("Do you what to see additional information of one of the items or buy an item : Type 'information' or 'buy' ");
-                String decision=scan.next();
-                if(decision.equals("information"))
-                {
-                    String itemChoice=scan.next();
-                    buy.selectItem(itemChoice);
-                }
-                if(decision.equals("buy"))
-                {
-                    System.out.println(" What would you like to buy");
-                    String choice=scan.next();
-                    buy.buyItem(choice);
-                    System.out.println("Would you like to go back to the main menu");
-                    String answer2=scan.next();
-                    if(answer2.equals("yes"))
-                    {
-                        simulate();
-                    }
-                   
-                }
-               
-                
+        switch (answerMenu.toLowerCase()) {
+            case "buy":
+                handleBuyOption(); // Call the method to handle the buy option
                 break;
-
-            case "Logout":
-
-            
-
+            case "cart":
+                System.out.println("Here are the items in your cart: ");
+                cart.displayCart();
+                System.out.println("Would you like to go back to the main menu?");
+                String goBackfromCart = scan.next();
+                switch (goBackfromCart.toLowerCase()) {
+                    case "yes":
+                        simulate();
+                        break;
+                    case "no":
+                        scan.close();    
+                        return;
+                    default:
+                        scan.close();    
+                        return;
+                }
+                break;
+            case "logout":
+                break;
+            case "sell":
+                break;
             default:
                 break;
         }
-
+        scan.close();
     }
+
+    public static void handleBuyOption() {
+        Scanner scan = new Scanner(System.in);
+        //System.out.println("Items for sale: ");
+        //buy.displayList();
+        System.out.println("Select one of the following options: \n Buy \n Information");
+        String answerDecision = scan.next();
+        switch (answerDecision.toLowerCase()) {
+            case "buy":
+                System.out.println("What would you like to buy?");
+                buy.displayList();
+                String itemChoiceBuy = scan.next();
+                cart.addItem(buy.getItem(itemChoiceBuy));
+                System.out.println("Select one of the following options: \n To Add More Items, enter: Add \n To go to Main Menu, enter: Menu");
+                String goBackfromBuy = scan.next();
+                switch (goBackfromBuy.toLowerCase()) {
+                    case "add":
+                        handleBuyOption();
+                    case "menu":
+                        simulate();
+                        break;
+                    default:
+                        break;
+                }
+                break; 
+            case "information":
+                System.out.println("What would you like more information about?");
+                buy.displayList();
+                String itemChoiceInfo = scan.next();
+                buy.selectItem(itemChoiceInfo);
+                System.out.println("Would you like to go back to the main menu?");
+                String goBackfromInfo = scan.next();
+                switch (goBackfromInfo.toLowerCase()) {
+                    case "yes":
+                        simulate();
+                    case "no":
+                        scan.close();    
+                        return;
+                    default:
+                        scan.close();    
+                        return;
+                }
+                
+            default:
+                break;
+        }
+        scan.close();
+    }
+
     public static void main(String[] args) throws Exception {
-
-       simulate();
-
-        
+        simulate();
     }
-
- }
+}
