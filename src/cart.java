@@ -13,7 +13,7 @@ public class Cart {
         if (itemCount < items.length) {
             items[itemCount] = item; // Add the item to the next available slot in the array
             itemCount++; // Increment the item count
-            System.out.println(item.getName() + " added to the cart.");
+            System.out.println("\n" + item.getName() + " added to the cart.");
         } else {
             System.out.println("Cart is full. Cannot add more items.");
         }
@@ -24,10 +24,10 @@ public class Cart {
         if (itemCount == 0) {
             System.out.println("Cart is empty.");
         } else {
-            System.out.println("Items in the cart:");
             for (int i = 0; i < itemCount; i++) {
                 System.out.println(items[i].getName() + " - $" + items[i].getPrice());
             }
+            System.out.println("\nTotal - $" + getTotalPrice());
         }
     }
 
@@ -46,4 +46,27 @@ public class Cart {
         itemCount = 0; // Reset the item count
         System.out.println("Cart cleared.");
     }
+
+    // return the total number of items in cart
+    public int getItemCount() {
+        return itemCount;
+    }
+
+    // checks to see if an item is already in the cart
+    public boolean containsItem(Item itemToCheck) {
+        for (int i = 0; i < itemCount; i++) {
+            if (items[i].equals(itemToCheck)) {
+                return true; // Item found in the cart
+            }
+        }
+        return false; // Item not found in the cart
+    }
+
+    // return all the items in the cart
+    public Item[] getItems() {
+        Item[] cartItems = new Item[itemCount];
+        System.arraycopy(items, 0, cartItems, 0, itemCount);
+        return cartItems;
+    }
+    
 }

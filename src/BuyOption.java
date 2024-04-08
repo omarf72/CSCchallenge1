@@ -148,4 +148,28 @@ public class BuyOption {
         }
     }
 
+
+    public void removeItem(String itemName) {
+        // Iterate over the items and remove the one with the matching name
+        for (int i = 0; i < size; i++) {
+            if (itemList[i].getName().equalsIgnoreCase(itemName)) {
+                // Shift the remaining items to the left to fill the gap
+                for (int j = i; j < size - 1; j++) {
+                    itemList[j] = itemList[j + 1];
+                }
+                // Decrement the size
+                size--;
+                break; // Exit the loop after removing the item
+            }
+        }
+    }
+
+    public boolean itemExists(String itemName) {
+        for (Item item : itemList) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return true; // Item found
+            }
+        }
+        return false; // Item not found
+    }
 }
