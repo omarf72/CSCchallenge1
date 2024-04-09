@@ -4,9 +4,11 @@ public class App {
     // Create a cart option
     private static Cart cart = new Cart(10);
     private static BuyOption buy = new BuyOption(); // Define BuyOption instance outside the method
+    private static LoginSystem login=new LoginSystem();
 
     public static void simulate() {
         Scanner scan = new Scanner(System.in);
+    
         System.out.println("\nChoose an option: \n Buy \n Sell \n Cart \n Logout");
         String answerMenu = scan.next();
 
@@ -127,6 +129,24 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
+        String art = "   __ __    ___  _      _       ___           __    __    ___  _        __   ___   ___ ___    ___      ______   ___       ______  __ __    ___       ___   __ __      ___ ___   ____  ____   __  _    ___ ______ \n" +
+        "  |  |  |  /  _]| |    | |     /   \\         |  |__|  |  /  _]| |      /  ] /   \\ |   |   |  /  _]    |      | /   \\     |      ||  |  |  /  _]     /   \\ |  |  |    |   |   | /    ||    \\ |  |/ ]  /  _]      |\n" +
+        "  |  |  | /  [_ | |    | |    |     |        |  |  |  | /  [_ | |     /  / |     || _   _ | /  [_     |      ||     |    |      ||  |  | /  [_     |     ||  |  |    | _   _ ||  o  ||  D  )|  ' /  /  [_|      |\n" +
+        "  |  _  ||    _]| |___ | |___ |  O  |        |  |  |  ||    _]| |___ /  /  |  O  ||  \\_/  ||    _]    |_|  |_||  O  |    |_|  |_||  _  ||    _]    |  Q  ||  |  |    |  \\_/  ||     ||    / |    \\ |    _]_|  |_|\n" +
+        "  |  |  ||   [_ |     ||     ||     | __     |  `  '  ||   [_ |     /   \\_ |     ||   |   ||   [_       |  |  |     |      |  |  |  |  ||   [_     |     ||  :  |    |   |   ||  _  ||    \\ |     \\|   [_  |  |  \n" +
+        "  |  |  ||     ||     ||     ||     ||  |     \\      / |     ||     \\     ||     ||   |   ||     |      |  |  |     |      |  |  |  |  ||     |    |     ||     |    |   |   ||  |  ||  .  \\|  .  ||     | |  |  \n" +
+        "  |__|__||_____||_____||_____| \\___/ |_ |      \\_/\\_/  |_____||_____|\\____| \\___/ |___|___||_____|      |__|   \\___/       |__|  |__|__||_____|     \\__,_| \\__,_|    |___|___||__|__||__|\\_||__|\\_||_____| |__|  \n" +
+        "                                        \\|                                                                                                                                                                          \n" +
+        "                                                                                                                                                                                                                       \n" +
+        "                                                                                                                                                                                                                       \n" +
+        "                                                                                                                                                                                                                       \n" +
+        "                                                                                                                                                                                                                       \n" +
+        "                                                                                                                                                                                                                       \n" +
+        "                                                                                                                                                                                                                       \n" +
+        "                                                                                                                                                                                                                       \n";
+
+        System.out.println(art);
+        login.Login();
         simulate();
     }
 }
