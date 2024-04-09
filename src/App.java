@@ -7,9 +7,8 @@ public class App {
 
     public static void simulate() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Choose an option: \n Buy \n Sell \n Cart \n Logout");
+        System.out.println("\nChoose an option: \n Buy \n Sell \n Cart \n Logout");
         String answerMenu = scan.next();
-        System.out.println();
 
         switch (answerMenu.toLowerCase()) {
             case "buy":
@@ -18,76 +17,113 @@ public class App {
             case "cart":
                 System.out.println("Here are the items in your cart: ");
                 cart.displayCart();
-                System.out.println("Would you like to go back to the main menu?");
-                String goBackfromCart = scan.next();
-                switch (goBackfromCart.toLowerCase()) {
-                    case "yes":
-                        simulate();
-                        break;
-                    case "no":
-                        scan.close();    
-                        return;
-                    default:
-                        scan.close();    
-                        return;
+                if (cart.getItemCount() == 0) {
+                    System.out.println("Returning to Main Menu\n");
+                    simulate();
+                    break;
+                } else {
+                    System.out.println("\nChoose an option: \n To go to checkout, enter: Checkout \n To return to main menu, enter: Menu");
+                    String goBackfromCart = scan.next();
+                    try {
+                        switch (goBackfromCart.toLowerCase()) {
+                            case "menu":
+                                simulate();
+                                scan.close();    
+                                return;
+                            case "checkout":
+                                cart.clearCart();
+                                simulate();
+                            default:
+                                scan.close();    
+                                return;
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Invalid input");
+                            scan.close();
+                            return;
+                        }
                 }
-                break;
+                
             case "logout":
-                break;
+                scan.close();    
+                return;
             case "sell":
-                break;
+                scan.close();    
+                return;
             default:
-                break;
+                scan.close();    
+                return;
         }
         scan.close();
     }
-
     public static void handleBuyOption() {
         Scanner scan = new Scanner(System.in);
-        //System.out.println("Items for sale: ");
-        //buy.displayList();
-        System.out.println("Select one of the following options: \n Buy \n Information");
+        System.out.println("\nSelect one of the following options: \n Buy \n Information");
         String answerDecision = scan.next();
         switch (answerDecision.toLowerCase()) {
             case "buy":
-                System.out.println("What would you like to buy?");
+                System.out.println("\nWhat would you like to buy?");
                 buy.displayList();
                 String itemChoiceBuy = scan.next();
-                cart.addItem(buy.getItem(itemChoiceBuy));
-                System.out.println("Select one of the following options: \n To Add More Items, enter: Add \n To go to Main Menu, enter: Menu");
+                if (cart.containsItem(buy.getItem(itemChoiceBuy))) {
+                    System.out.println("\nItem is already in cart");
+                } else {
+                    try {
+                        cart.addItem(buy.getItem(itemChoiceBuy));
+                        buy.removeItem(itemChoiceBuy);
+                    } catch (Exception e) {
+                        System.out.println("Invalid input");
+                        scan.close();
+                        return;
+                    }
+                }
+                System.out.println("\nSelect one of the following options: \n To Add Additional Items, enter: Add \n To go to Main Menu, enter: Menu");
                 String goBackfromBuy = scan.next();
                 switch (goBackfromBuy.toLowerCase()) {
                     case "add":
                         handleBuyOption();
                     case "menu":
                         simulate();
-                        break;
+                        scan.close();    
+                        return;
                     default:
-                        break;
+                        scan.close();    
+                        return;
                 }
-                break; 
             case "information":
-                System.out.println("What would you like more information about?");
+                System.out.println("\nWhat would you like more information about?");
                 buy.displayList();
                 String itemChoiceInfo = scan.next();
-                buy.selectItem(itemChoiceInfo);
-                System.out.println("Would you like to go back to the main menu?");
-                String goBackfromInfo = scan.next();
-                switch (goBackfromInfo.toLowerCase()) {
-                    case "yes":
-                        simulate();
-                    case "no":
-                        scan.close();    
-                        return;
-                    default:
-                        scan.close();    
-                        return;
+                if (buy.itemExists(itemChoiceInfo)) {
+                    try {
+                        buy.selectItem(itemChoiceInfo);
+                        System.out.println("\nWould you like to go back to the main menu?");
+                        String goBackfromInfo = scan.next();
+                        switch (goBackfromInfo.toLowerCase()) {
+                            case "yes":
+                                simulate();
+                            case "no":
+                                scan.close();    
+                                return;
+                            default:
+                                scan.close();    
+                                return;
+                            }
+                    } catch (Exception e) {
+                        System.out.println("Invalid input");
+                        scan.close();
+                        return;   
+                    }
                 }
                 
             default:
-                break;
+                scan.close();    
+                return;
         }
-        scan.close();
+    }
+
+    public static void handleCheckoutOption() {
+
     }
 
     public static void main(String[] args) throws Exception {
