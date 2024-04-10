@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Sell {
     private static Scanner scanner = new Scanner(System.in);
-    private static ArrayList<Item> itemsForSale = new ArrayList<>();
+    private static ArrayList<SellItems> itemsForSale = new ArrayList<>();
 
     public static void main(String[] args) {
         Sell sell = new Sell();
@@ -32,7 +32,7 @@ public class Sell {
         }
     }
 
-    private void displayMainMenu() {
+    public void displayMainMenu() {
         System.out.println("\nSell Menu:");
         System.out.println("1. See current items for sale");
         System.out.println("2. Add a new item for sale");
@@ -40,22 +40,22 @@ public class Sell {
         System.out.print("Enter your choice: ");
     }
 
-    private void displayCurrentItems() {
+    public void displayCurrentItems() {
         if (itemsForSale.isEmpty()) {
             System.out.println("No items currently for sale.");
         } else {
             System.out.println("\nCurrent Items for Sale:");
             System.out.println("Name\t\tCategory\tPrice");
-            for (Item item : itemsForSale) {
-                System.out.println(item.getName() + "\t\t" + item.getCategory() + "\t\t$" + item.getPrice());
+            for (SellItems item : itemsForSale) {
+                System.out.println(item.getName() + "\t\t" + item.getCatergory() + "\t\t$" + item.getPrice());
             }
         }
         // Option to go back to main menu
-        System.out.println("\nPress Enter to go back to the main menu...");
-        scanner.nextLine(); 
+        //System.out.println("\nPress Enter to go back to the main menu...");
+        //scanner.nextLine(); 
     }
 
-    private void addItem() {
+    public void addItem() {
         System.out.println("\nAdd a New Item for Sale:");
         System.out.print("Enter item name: ");
         String name = scanner.nextLine();
@@ -63,18 +63,18 @@ public class Sell {
         String category = scanner.nextLine();
         System.out.print("Enter item price: $");
         double price = scanner.nextDouble();
-        scanner.nextLine(); 
+        //scanner.nextLine(); 
 
-        itemsForSale.add(new Item(name, category, price));
+        itemsForSale.add(new SellItems(name, category, price));
         System.out.println("Item added successfully!");
 
        
-        System.out.println("\nPress Enter to go back to the main menu...");
-        scanner.nextLine(); 
+        
+        
     }
 }
 
-class Item {
+/*class Item {
     private String name;
     private String category;
     private double price;
@@ -96,5 +96,5 @@ class Item {
     public double getPrice() {
         return price;
     }
-}
+}*/
 
